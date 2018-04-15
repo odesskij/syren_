@@ -65,6 +65,7 @@ Vagrant.configure("2") do |config|
 
       curl -L https://raw.githubusercontent.com/hgomez/devops-incubator/master/forge-tricks/batch-install-jenkins-plugins.sh -o batch-install-jenkins-plugins.sh
       echo workflow-aggregator > plugins.txt
+      mkdir -p /var/lib/jenkins/plugins
       bash ./batch-install-jenkins-plugins.sh --plugins plugins.txt --plugindir /var/lib/jenkins/plugins
 
       chown -R jenkins:jenkins /var/lib/jenkins
