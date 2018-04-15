@@ -19,7 +19,8 @@ Vagrant.configure("2") do |config|
       apache.vm.provision "shell", inline: <<-SHELL
          mkdir -p /var/www/html
          yum install -y httpd
-         echo I\\\'m server #{i} > /usr/share/httpd/noindex/index.html
+         cp /vagrant/vhost.conf /etc/httpd/conf.d/vhost.conf
+         echo I\\\'m server #{i} > /var/www/html/index.html
          systemctl enable httpd
          systemctl start httpd
       SHELL
@@ -64,7 +65,7 @@ Vagrant.configure("2") do |config|
 
       curl -L https://raw.githubusercontent.com/hgomez/devops-incubator/master/forge-tricks/batch-install-jenkins-plugins.sh -o batch-install-jenkins-plugins.sh
       echo workflow-aggregator > plugins.txt
-      bash ./batch-install-jenkins-plugins.sh --plugins plugins.txt --plugindir /var/lib/jenkins
+      bash ./batch-install-jenkins-plugins.sh --plugins plugins.txt --plugindir /var/lib/jenkins/plugins
 
       chown -R jenkins:jenkins /var/lib/jenkins
 
